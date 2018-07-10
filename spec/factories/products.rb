@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :product do
-    name "MyString"
+    name { Faker::Coffee.blend_name }
     brand nil
   end
 end
