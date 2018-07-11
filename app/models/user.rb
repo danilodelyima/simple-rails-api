@@ -11,5 +11,17 @@
 #
 
 class User < ApplicationRecord
+  has_many :relationships
+  has_many :brands, -> { distinct }, through: :relationships
+
   validates :name, :email, :password, presence: true
+
+
+  def follow!(brand)
+    relationships.create!(brand_id: brand)
+  end
+
+  def unfollow!(brand)
+    relationships.find_by(brand_id: brand).destroy
+  end
 end

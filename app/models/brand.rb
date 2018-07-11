@@ -10,6 +10,8 @@
 
 class Brand < ApplicationRecord
   has_many :products, dependent: :destroy
+  has_many :relationships
+  has_many :users, through: :relationships
 
   validates :name, presence: true
 end
