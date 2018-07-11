@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :relationships
   has_many :brands, -> { distinct }, through: :relationships
 
+  has_many :friendships
+  has_many :friends, through: :friendships
+
   validates :name, :email, :password, presence: true
 
 
@@ -23,5 +26,9 @@ class User < ApplicationRecord
 
   def unfollow!(brand)
     relationships.find_by(brand_id: brand).destroy
+  end
+
+  def friendship!(friend)
+    friendships.create!(friend_id: friend)
   end
 end
