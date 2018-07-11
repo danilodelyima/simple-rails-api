@@ -15,6 +15,6 @@ class RelationshipsController < ApplicationController
     end
 
     def relatioship_params
-      params.require(:relatioship).permit(:user_id, :brand_id)
+      params.permit(:user_id, :brand_id)
     end
 end
