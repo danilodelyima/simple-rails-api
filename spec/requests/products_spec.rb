@@ -48,4 +48,51 @@ RSpec.describe 'Products', type: :request do
       end
     end
   end
+
+  describe 'POST /brands/:brand_id/items' do
+
+    context 'when request attributes are valid' do
+      let(:product) { {name: 'Nitro Cold Brew', brand_id: brand_id } }
+
+      before { post "/brands/#{brand_id}/products", params: product }
+
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
+    end
+
+    context 'when an invalid request' do
+      before { post "/brands/#{brand_id}/products", params: {} }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+    end
+  end
+
+
+  describe 'PUT /brands/:brand_id/products/:id' do
+    let(:product) { { name: 'Vanilla Sweet Cream Cold Brew' } }
+
+    before { put "/brands/#{brand_id}/products/#{id}", params: product }
+
+    context 'when product exists' do
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'updates the item' do
+        product = Product.find(id)
+        expect(product.name).to match('Vanilla Sweet Cream Cold Brew')
+      end
+    end
+
+    context 'when the item does not exist' do
+      let(:id) { 0 }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
+    end
+  end
 end
