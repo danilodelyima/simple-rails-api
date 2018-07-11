@@ -51,7 +51,7 @@ RSpec.describe 'Products', type: :request do
 
   describe 'POST /brands/:brand_id/items' do
 
-    context 'when request attributes are valid' do
+    context 'when the request is valid' do
       let(:product) { {name: 'Nitro Cold Brew', brand_id: brand_id } }
 
       before { post "/brands/#{brand_id}/products", params: product }
@@ -61,7 +61,7 @@ RSpec.describe 'Products', type: :request do
       end
     end
 
-    context 'when an invalid request' do
+    context 'when the request is invalid' do
       before { post "/brands/#{brand_id}/products", params: {} }
 
       it 'returns status code 422' do
@@ -76,7 +76,7 @@ RSpec.describe 'Products', type: :request do
 
     before { put "/brands/#{brand_id}/products/#{id}", params: product }
 
-    context 'when product exists' do
+    context 'when the request is valid' do
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
@@ -87,7 +87,7 @@ RSpec.describe 'Products', type: :request do
       end
     end
 
-    context 'when the item does not exist' do
+    context 'when the request is invalid' do
       let(:id) { 0 }
 
       it 'returns status code 404' do

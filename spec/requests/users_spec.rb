@@ -67,7 +67,7 @@ RSpec.describe 'Users', type: :request do
   describe 'PUT /users/:id' do
     let(:user) { { name: 'Bob' } }
 
-    context 'when the record exists' do
+    context 'when the request is valid' do
       before { put "/users/#{id}", params: user.as_json }
 
       it 'updates the record' do
@@ -76,6 +76,14 @@ RSpec.describe 'Users', type: :request do
 
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when the request is invalid' do
+      before { put "/users/#{id}", params: { name: '' } }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
       end
     end
   end

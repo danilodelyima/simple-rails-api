@@ -17,7 +17,7 @@ RSpec.describe "Relationships", type: :request do
       end
     end
 
-    context 'when the request does not exist' do
+    context 'when the request is invalid' do
 
       before { post '/relationships', params: invalid_attributes }
 
