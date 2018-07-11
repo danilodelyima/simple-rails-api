@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Relationships", type: :request do
+RSpec.describe "Friendships", type: :request do
   let!(:friend) { create(:user) }
   let!(:user) { create(:user) }
   let(:valid_attributes) { { user_id: user.id, friend_id: friend.id } }
