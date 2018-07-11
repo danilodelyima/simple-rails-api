@@ -13,6 +13,10 @@ RSpec.describe "Brands", type: :request do
       expect(json.size).to eq(10)
     end
 
+    it "includes products key" do
+      expect(json.first).to have_key("products")
+    end
+
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
     end
@@ -29,6 +33,10 @@ RSpec.describe "Brands", type: :request do
         expect(json['id']).to eq(id)
       end
 
+      it "includes products key" do
+        expect(json).to have_key("products")
+      end
+
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
@@ -38,6 +46,47 @@ RSpec.describe "Brands", type: :request do
       let(:id) { 0 }
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
+      end
+    end
+  end
+
+  describe 'POST /brands' do
+
+    let(:brand) { { name: 'Starbucks' } }
+
+    context 'when the request is valid' do
+      before { post '/brands', params: brand }
+
+      it 'creates a brand' do
+        expect(json['name']).to eq('Starbucks')
+      end
+
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
+    end
+
+    context 'when the request is invalid' do
+      before { post '/brands', params: { name: '' } }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+    end
+  end
+
+  describe 'PUT /brands/:id' do
+    let(:brand) { { name: 'Apple' } }
+
+    context 'when the record exists' do
+      before { put "/brands/#{id}", params: brand }
+
+      it 'updates the record' do
+        expect(json['name']).to eq('Apple')
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
       end
     end
   end

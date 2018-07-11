@@ -14,4 +14,10 @@ class Brand < ApplicationRecord
   has_many :users, through: :relationships
 
   validates :name, presence: true
+
+  def as_json(options={})
+    super(
+      include: :products
+    )
+  end
 end
