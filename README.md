@@ -1,24 +1,23 @@
-# README
+# Getting started
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple rails API
 
-Things you may want to cover:
+Clone this respository and run the commands:
 
-* Ruby version
+OBS: configure your database.yml if you need
 
-* System dependencies
+```
+bundle install
+rails db:create db:migrate dev:setup
+bundle exec rspec
+```
 
-* Configuration
+## Built with
 
-* Database creation
+- Rails 5.2.0 API mode
+- Rpec with shoulda matchers for tests
+- MySQL
 
-* Database initialization
+## API documentation:
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+see this link: [https://app.swaggerhub.com/apis/danilodelyima/simpleapi/1.0.0](https://app.swaggerhub.com/apis/danilodelyima/simpleapi/1.0.0)
